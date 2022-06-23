@@ -27,5 +27,64 @@ describe("myCalculatorApp", () => {
     assert.ok(account.greeting==="Hey");
 
   });
+
+  it("adds two numbers!", async () => {
+    // Add your test here.
+    const tx = await program.rpc.add(new anchor.BN(2),new anchor.BN(5),{
+      accounts:{
+        calculator:calculator.publicKey
+      }
+    });
+    
+    const account=await program.account.calculator.fetch(calculator.publicKey);
+
+    assert.ok(account.result.eq(new anchor.BN(7)));
+
+  });
+
+  
+  it("substracts two numbers!", async () => {
+    // Add your test here.
+    const tx = await program.rpc.substract(new anchor.BN(5),new anchor.BN(2),{
+      accounts:{
+        calculator:calculator.publicKey
+      }
+    });
+    
+    const account=await program.account.calculator.fetch(calculator.publicKey);
+
+    assert.ok(account.result.eq(new anchor.BN(3)));
+
+  });
+
+  
+  it("multiplies two numbers!", async () => {
+    // Add your test here.
+    const tx = await program.rpc.multiply(new anchor.BN(2),new anchor.BN(5),{
+      accounts:{
+        calculator:calculator.publicKey
+      }
+    });
+    
+    const account=await program.account.calculator.fetch(calculator.publicKey);
+
+    assert.ok(account.result.eq(new anchor.BN(10)));
+
+  });
+
+    
+  it("divides two numbers!", async () => {
+    // Add your test here.
+    const tx = await program.rpc.divide(new anchor.BN(10),new anchor.BN(5),{
+      accounts:{
+        calculator:calculator.publicKey
+      }
+    });
+    
+    const account=await program.account.calculator.fetch(calculator.publicKey);
+
+    assert.ok(account.result.eq(new anchor.BN(2)));
+
+  });
 });
 
